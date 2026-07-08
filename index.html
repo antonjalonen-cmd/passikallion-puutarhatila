@@ -99,10 +99,11 @@
     /* hamburger */
     .hamburger {
       display: none; flex-direction: column; gap: 5px;
-      width: 24px; cursor: pointer;
+      padding: 0; background: none; border: none;
+      cursor: pointer;
     }
     .hamburger span {
-      display: block; height: 1.5px; background: var(--forest);
+      display: block; width: 22px; height: 2px; background: var(--forest);
       transition: transform 0.3s, opacity 0.3s;
     }
     .mobile-menu {
@@ -1060,14 +1061,14 @@
   // ── I18N ──
   function setLang(l) {
     document.documentElement.setAttribute('data-lang', l);
-    localStorage.setItem('lang', l);
+    localStorage.setItem('lang_'+location.pathname.split('/')[1], l);
     ['fi','sv','en'].forEach(x => {
       const b = document.getElementById('btn-'+x);
       if (b) b.classList.toggle('active', x === l);
     });
   }
   (function() {
-    const saved = localStorage.getItem('lang');
+    const saved = localStorage.getItem('lang_'+location.pathname.split('/')[1]);
     if (saved && ['fi','sv','en'].includes(saved)) setLang(saved);
     else setLang('fi');
   })();
